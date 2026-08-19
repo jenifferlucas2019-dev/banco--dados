@@ -1,0 +1,33 @@
+CREAte DATABASE escola;
+USE escola;
+CREATE TABLE sala(
+idsala INT NOT NULL PRIMARY KEY,
+nomesala VARCHAR(45),
+capacidadesala INT
+);
+-- criar a tebela
+CREATE TABLE turma(
+idtuma INT NOT NULL PRIMARY KEY,
+nometurma VARCHAR(45),
+periodo  VARCHAR(45),
+sala_idsala INT,
+FOREIGN KEY(sala_idsala)
+REFERENCES sala (idsala)
+);
+
+CREATE TABLE professor(
+idprofessor INT NOT NULL PRIMARY KEY,
+nomeprofessor VARCHAR(45),
+formacaoprofessor VARCHAR(45),
+turma_idturma INT,
+FOREIGN KEY(turma_idturma)
+REFERENCES turma (idtuma)
+);
+
+CREATE TABLE aulas(
+idaulas INT NOT NULL PRIMARY KEY,
+nomeaulas VARCHAR(45),
+professor_idprofessor INT,
+FOREIGN KEY(professor_idprofessor)
+REFERENCES professor(idprofessor)
+);
