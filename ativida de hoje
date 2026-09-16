@@ -1,0 +1,9 @@
+INSERT INTO cliente
+(cod_cliente,nom_categoria_cliente,conta)
+
+(`1´,´private´,'cliente com renda cima de 10mil')
+(´2´ ´exclusive´,'cliente com renda cima de 20mil)
+(´3´ ´gold´,'cliente com renda cima de 30mil)
+(´4´ ´´,'cliente com renda cima  de  40mil)
+
+select*FROM CATEGORIA;
