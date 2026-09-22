@@ -1,0 +1,48 @@
+CREATE DATABASE regra_constrain;
+CREATE TABLE usuario(
+id_cliente INT AUTO_INCREMENT,
+nome VARCHAR(50) NOT NULL,
+cpf BIGINT UNIQUE,
+pais VARCHAR(50) DEFAULT'BRASIL',
+graduado ENUM('SIM','NâO'),
+num_filhos INT,
+CHECK(num_filhos >=0),
+PRIMARY KEY (id_cliente));
+
+ SELECT * FROM usuario;
+
+INSERT INTO usuario
+(nome, cpf, pais, graduado, num_filhos)
+VALUES
+('menoel', 12345678913, 'brasil', 'sim', 2);
+
+INSERT INTO usuario
+(nome, cpf, pais, graduado, num_filhos)
+VALUES
+('paulo', 12345678912, 'brasil', 'sim', 2);
+
+INSERT INTO usuario
+(nome, cpf, pais, graduado, num_filhos)
+VALUES
+('CARLOS', 12345678919, 'brasil', 'sim', 2);
+
+
+
+-- colocar incompleto na graduçâo
+INSERT INTO	usuario
+(nome, cpf, pais, graduado, num_filhos)
+VALUES
+('maria',12345678916,'brasil','incompleto',2);
+
+ -- colocar numero de filhos negativo
+ INSERT INTO usuario
+ (nome, cpf, pais, graduado, num_filhos)
+ VALUES
+ ('maria',12345678923,'brasil','sim',-1);
+ 
+ 
+  INSERT INTO usuario
+ (nome, cpf, pais, graduado, num_filhos)
+ VALUES
+ ('maria',12345678920,'brasil','sim',3);
+ 
