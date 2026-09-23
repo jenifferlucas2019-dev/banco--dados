@@ -1,0 +1,97 @@
+
+CREATE TABLE Editora (
+    ID_Editora INT PRIMARY KEY,
+    NomeFantasia_Editora VARCHAR(100),
+    RazaoSocial_Editora VARCHAR(100),
+    PAIS VARCHAR(50)
+);
+
+CREATE TABLE Autor (
+    ID_Autor INT PRIMARY KEY,
+    Nome_Autor VARCHAR(100),
+    RG_Autor VARCHAR(20)
+);
+
+CREATE TABLE Financiador (
+    ID_Financiador INT PRIMARY KEY,
+    Nome_Financiador VARCHAR(100)
+);
+
+CREATE TABLE Cliente (
+    ID_Cliente INT PRIMARY KEY,
+    Nome_Cliente VARCHAR(100),
+    RG_Cliente VARCHAR(20),
+    CPF_Cliente VARCHAR(20),
+    PAIS VARCHAR(50)
+);
+
+CREATE TABLE Livro (
+    ID_Livro INT PRIMARY KEY,
+    ISBN_Livro VARCHAR(30),
+    Titulo_Livro VARCHAR(100),
+    Preco_Livro DECIMAL(10,2),
+    Categoria_Livro VARCHAR(50),
+    ID_Editora INT,
+    ID_Autor INT,
+    ID_Financiador INT,
+
+    FOREIGN KEY (ID_Editora)
+        REFERENCES Editora(ID_Editora),
+
+    FOREIGN KEY (ID_Autor)
+        REFERENCES Autor(ID_Autor),
+
+    FOREIGN KEY (ID_Financiador)
+        REFERENCES Financiador(ID_Financiador)
+);
+
+
+
+
+-- CLIENTE
+INSERT IGNORE INTO Cliente
+(ID_Cliente, Nome_Cliente, RG_Cliente, CPF_Cliente, PAIS)
+VALUES
+(1, 'João Silva', '123456789', '111.222.333-44', 'Brasil'),
+(2, 'Maria Santos', '987654321', '222.333.444-55', 'Brasil'),
+(3, 'Ana Oliveira', '456789123', '333.444.555-66', 'Argentina');
+
+
+-- FINANCIADOR
+INSERT IGNORE INTO Financiador
+(ID_Financiador, Nome_Financiador, CNPJ_Financiador)
+VALUES
+(1, 'Financeira Alfa', '11.222.333/0001-44'),
+(2, 'Financeira Beta', '22.333.444/0001-55'),
+(3, 'Financeira Gama', '33.444.555/0001-66');
+
+
+-- AUTOR
+INSERT IGNORE INTO Autor
+(ID_Autor, Nome_Autor, RG_Autor)
+VALUES
+(1, 'Machado de Assis', '111222333'),
+(2, 'Clarice Lispector', '222333444'),
+(3, 'Paulo Coelho', '333444555');
+
+
+-- EDITORA
+INSERT IGNORE INTO Editora
+(ID_Editora, NomeFantasia_Editora, RazaoSocial_Editora, PAIS)
+VALUES
+(1, 'Editora Sol', 'Editora Sol LTDA', 'Brasil'),
+(2, 'Editora Lua', 'Editora Lua LTDA', 'Brasil'),
+(3, 'Editora Estrela', 'Editora Estrela LTDA', 'Portugal');
+
+
+-- LIVRO
+INSERT IGNORE INTO Livro
+(ID_Livro, ISBN_Livro, Titulo_Livro, Preco_Livro,
+Categoria_Livro, ID_Editora, ID_Autor, ID_Financiador)
+VALUES
+(1, '978-85-11111-11-1', 'Dom Casmurro', 39.90, 'Romance', 1, 1, 1),
+(2, '978-85-22222-22-2', 'A Hora da Estrela', 45.50, 'Drama', 2, 2, 2),
+(3, '978-85-33333-33-3', 'O Alquimista', 50.00, 'Aventura', 3, 3, 3);
+
+SELECT * FROM Cliente
+
