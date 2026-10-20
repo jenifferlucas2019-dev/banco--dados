@@ -1,0 +1,72 @@
+CREATE DATABASE escola_xyz;
+USE escola_xyz;
+
+CREATE TABLE aluno (
+    id_aluno INT PRIMARY KEY,
+    nome VARCHAR(100)
+);
+
+CREATE TABLE curso (
+    id_curso INT PRIMARY KEY,
+    nome VARCHAR(100),
+    duracao INT
+);
+
+CREATE TABLE inscricao (
+    id_inscricao INT PRIMARY KEY,
+    aluno_id INT,
+    dt_inscricao DATE,
+    curso_id INT,
+    FOREIGN KEY (aluno_id) REFERENCES aluno(id_aluno),
+    FOREIGN KEY (curso_id) REFERENCES curso(id_curso)
+);
+
+CREATE TABLE mensalidade (
+    id_mensalidade INT PRIMARY KEY,
+    inscricao_id INT,
+    dt_vencimento DATE,
+    valor DECIMAL(10,2),
+    status_pagamento ENUM('Pago', 'Não Pago'),
+    FOREIGN KEY (inscricao_id)
+        REFERENCES inscricao(id_inscricao)
+);
+
+INSERT INTO aluno VALUES
+(1, 'Ana'),
+(2, 'Bruno'),
+(3, 'Carlos'),
+(4, 'Mariana');
+
+select*from aluno;
+
+INSERT INTO curso VALUES
+(1, 'Informática', 12),
+(2, 'Banco de Dados', 6),
+(3, 'Programação', 12),
+(4, 'Redes', 8);
+select*from curso;
+
+INSERT INTO inscricao
+(id_inscricao, dt_inscricao, aluno_id, curso_id)
+VALUES
+(1, '2020-01-02', 4, 4),
+(2, '2020-01-02', 3, 3),
+(3, '2020-01-02', 2, 2),
+(4, '2020-06-02', 4, 4),
+(5, '2020-06-02', 3, 3),
+(6, '2020-06-02', 2, 2),
+(7, '2020-06-02', 4, 4);
+
+select*from inscricao;
+
+INSERT INTO mensalidade
+(id_mensalidade, dt_vencimento, valor, status_pagamento, inscricao_id)
+VALUES
+(1, '2020-01-10', 550.00, 'Pago', 1),
+(2, '2020-01-10', 540.00, 'Pago', 2),
+(3, '2020-01-10', 530.00, 'Pago', 3),
+(4, '2020-06-10', 580.00, 'Não Pago', 4),
+(5, '2020-06-10', 570.00, 'Não Pago', 5),
+(6, '2020-06-10', 560.00, 'Não Pago', 6);
+
+select*from mensalidade;
